@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import { Router, Route, Redirect, Switch } from 'react-router-dom';
+import { createHashHistory } from 'history';
+import Scene from './container/scene';
 import './app.css';
 import './index.css';
 import menu_background from './images/menu.jpg';
+const history = createHashHistory();
 class App extends Component {
   render() {
-    return (
-      <div className="App"
-        id="webvn"
-      >
+    const Home = (
+      <div className="App" id="webvn">
         <div className="center">
           <div
-            className='fill'
+            className="fill"
             id="menu"
             style={{
               display: 'block',
@@ -28,6 +30,15 @@ class App extends Component {
           </div>
         </div>
       </div>
+    );
+    return (
+      <Router history={history}>
+        <Switch>
+          <Route path="/" render={() => Home} />
+          <Route path="/scene" render={() => Scene} />
+          <Redirect to="/" />
+        </Switch>
+      </Router>
     );
   }
 }
